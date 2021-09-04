@@ -1,0 +1,640 @@
+
+Angular versions:-
+=================
+
+> 2010 :- Google has released AngularJs to build the client side applications.
+
+> This angularJs f/w was not upto the marks with respect to the performance and flexibility for todays complex and loosly coupled UI(client side applications).
+
+> So in the year 2016 Google released Angular 2 which was entirely different from the AngularJs.
+
+> This Angular 2 was created by completely rewriting the AngularJs using TypeScript.
+
+> Then the further versions of Angular were 2.0 ,2.1 ,2.2, 2.3, 4, 5, 6, 7, 8, 9, 10, 11 and 12.
+
+Angular:-
+=========
+
+> It is a framework for building client side application using html, css, Javascript/Typescript.
+
+> We can develope a client side application without using framework with the help of -
+
+    1. HTML 
+    2. CSS
+    3. JavaScript
+    4. JQuery 
+    5. Ajax 
+
+> Where using HTML, we write the static part of our Client Side Application(CSA).
+
+> Similarly by using JS, we write dynamic part of our Client Side Application(CSA).
+
+> After that we embed this JavaScript file to our HTML file and using this Js we manipulate the html DOM tree.
+
+> Now with the angular f/w we develop the same thing i.e. PL(Presentation Layer)/ UI of a business application.
+
+> In angular, we do not have the explicit dividation between html and Js. 
+
+> Angular follows component based model.
+
+> With angular we need to think in the terms of components.
+
+> We need to think about what are the components we need to build, so we need to create those components, then bind them togehter as an entire application.
+
+> Some of the examples of components are - 
+
+    1. header component
+
+    2. body component
+
+    3. footer component
+
+    4. navbar component
+
+    5. sidebar component
+
+> Here these individual section can be broken out and can be created as a component.
+
+Component :-
+============
+
+> Component is a smaller and more maintainable piece of application that can be reused in different places.
+
+> Suppose we created a header component, which means we created html, js and css together for this header component and this component 
+  will become a self sufficient piece of our client side application that can be plugged in somewhere else and it also knows how to render header.
+
+> We can say that a component is a combination of view and its backing logic i.e. when we create a component basically we create its html, js and css.
+
+> Once we create a component, then we need to use it somewhere and we use it by creating/registering a custom tag for this component.
+  and this user-defined tag of this component is known as selector for this component.
+
+> Suppose if we created a header component, then we need to register it by using custom tag like "<Header-Comp>" in order to plug it somewhere and use.
+
+> So every component can be assigned by a tag or a selector and if we use this tag in our angular application then this tag will render the component related view.
+
+> These component can also have sub-components and it will look like a tree which can be called as "component-tree".
+
+> For this tree there should be a root i.e. starting point and it is known as "root component".
+
+> Every angular application has a root component which is going to hold other components.
+
+> Root component in any angular application is called as "AppComponent".
+
+> Every angular application should have atleast AppComponent and we can create other components as a child of this AppComponent.
+
+> "In a nutshell a real world angular application is essentially a tree of components starting from AppComponent."
+
+Modules :-
+==========
+
+> In every angular application there is one root component called "AppComponent" and one root module called "AppModule".
+
+> It is a group of releated components.
+
+> For a smaller application only one module is enough.
+
+> As our application grows we may want to break our application in smaller and more maintainable modules like - 
+
+        CourseModule - Which includes all the course related components.
+
+        InstructorModule - Which includes all the Instructor related components. 
+
+        AdminModule - Which includes all the Admin related components. 
+
+
+Angular Application :-
+=============================
+
+Setup the development environment:-
+-----------------------------------
+
+> To develop an angular application we need to install following three things :-
+
+    1.Nodejs
+
+    2.IDE (VSCode)
+
+    3.Angualr-CLI (It is a tool which create a startup angular project. Here no need to create and assemble our angular application manually.)
+
+> Install NodeJs.
+
+> node -v (To check node version)
+
+> npm -v (To check npm version)
+
+> To install Angular-CLI globally in your system, run following command - 
+
+    npm install -g @angular/cli
+
+> ng --version (To check the Installed version of Angular)
+
+Creating and running a first angular application:-
+--------------------------------------------------
+
+> For creating angular app run following command 
+
+    ng new "YourAppName"(FirstAngularApp)
+
+> Select "yes" for routing.
+
+> Select CSS
+
+> After that it will take some time to create angular application i.e the basic project skeleton.
+
+> Now move in your application folder i.e. FirstAngularApp in our case.
+
+> Run following command
+
+    ng serve
+
+> This command will automatically compile and bundle our code and then it will launch our application inside the integrated server on Port:4200.
+
+> If you want to change the port of running application then run following command - 
+
+    ng serve --port 8500 (Any port no.)
+
+> Type "localhost:4200" in a browser to see working application.
+
+Structure/Skeleton of an Angular Application :-
+===============================================
+
+> node_modules : All the required dependencies are stored/downloaded in this folder. This folder consumes 99.90% of storage of our angular application.
+
+> src : This folder contains all the code i.e. components, modules, etc.
+
+> .browserslistrc : This file contains the details of all the browsers i.e. whatever the browsers your app is going to support.
+
+> .editorconfig : This file is a universal rule set for the developer. The rules in this files is set by team leader.
+
+> .gitignore : When we push our application on github then whatever the files and folders mentioned in this folder are going to be ignored and they won't be pushed to github.
+
+> angular.json : This file contains angular project related configurations. By default these configurations are done by angular CLI.
+                 No need to touch this file unless and untill there is any specific requirement.
+
+> karma.conf.js : This is test runner. When we want to perform unit test of some of the components then we need to change some configuration in this file.
+
+> package-lock.json : Exact versions of all the dependencies are mentioned in this file.
+
+> package.json : Angular project related information like libraries, devdependencies, application version is given in this file.
+
+> README.md : Instructions are mentioned in this file.
+
+> tsconfig.json : This file is used for TypeScript compiler. To compile anything outside the "app" folder, the configuration is mentioned in this file.
+
+> tsconfig.app.json : To compile anything inside the "app" folder, the configuration is mentioned in this file.
+
+> tsconfig.spec.json : To compile anything inside the testing, the configuration is mentioned in this file.
+
+Inside "src/app" folder :-
+--------------------------
+
+> app-routing.module.ts : while creating angular app, if we enable the routing thenonly this file will get created. How to map a path to a particular component
+  that will be speciified in this file.
+
+> app.component.css | app.component.html | app.component.spec.ts | app.component.ts : If we create any new component then these four files will be created. Here html and css files are 
+                                                                                      view of a component and TypeScript file contains backing logic of the component.
+                                                                                      In spec.ts file unit tests are written for a particular component.
+
+> app.module.ts : This is the root module of our angular app.
+
+Inside "src/assets" folder :-
+-----------------------------
+
+> We can put some static assets like image, audio files, video files of our client side application inside this folder.
+
+Inside "src/environments" folder :-
+-----------------------------------
+> This folder is for environment related configuration.
+
+> environment.prod.ts : Production environment related configurations are placed in this file.
+
+> environment.ts : Development environment related configurations are placed in this file.
+
+> favicon.ico : It is an icon.
+
+> index.html : This file is the exact view of running angular application. It contains "<app-root>" tag which is nothing but the selector for the app-component.
+
+> main.ts : It is the main typescript file which will be loading our appmodule i.e. "app.module.ts" file. It contains main method i.e. the starting point of our angular application.
+
+> pollyfills.ts : How to fill the gap between old browser and new browser those related configuration is written in this file.
+
+> styles.css : The global style is specified in this file.
+
+> test.ts : Testing environment related configuration is placed in this file.
+
+Flow of execution of an Angular Application :-
+==============================================
+
+main.ts : 
+---------
+
+> Starting point of angular application. 
+
+> It is the first file which gets open when we run an angular application.
+
+> It will load AppModule (app.module.ts)
+
+app.module.ts:
+-------------- 
+> From the app module control will go to AppComponent (app.component.ts).
+
+app.component.ts :
+------------------
+> From app component the control will go to selector "app-root".
+
+index.html :
+------------
+> Now this selector(<app-root>) will be injected in body section of index.html file. 
+
+> The related view of AppComponent's html will be rendered in index.html.
+
+> Then the related view will be displayed in the browser i.e. (app.component.html)
+
+> If we open page source from browser then in body section we can find some script tags along with the <app-root> -
+
+        <script src="runtime.js" defer></script>
+        <script src="polyfills.js" defer></script>
+        <script src="styles.js" defer></script>
+        <script src="vendor.js" defer></script>
+        <script src="main.js" defer></script>
+
+> Now the <app-root> is not a html tag so in order to understand <app-root> our angular will insert the above javascript files in our index.html file.
+
+Inside app.module.ts :-
+=======================
+
+@NgModule( {
+  // This section will define/list all the components of our application. 
+  declarations: [
+    AppComponent
+  ],
+
+  // All modules other than app module i.e. modules which we will create will be listed in this section.
+  imports: [
+    BrowserModule,
+    AppRoutingModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+}  )
+export class AppModule { }
+
+> App Module is annonated with @NgModule annotation/decorater.
+
+> This NgModule will take one object as an argument.
+
+> In this object, there are four different properties with four different arrays - 
+
+    1. declaration ( This section will define/list all the components/directives/pipes of our application.)
+
+    2. imports (All modules other than app module i.e. modules which we will create will be listed in this section.)
+
+    3. providers (Used for registering services and some classes which are going to be part of angular context)
+
+    4. bootstrap (This property will launch the first root-component i.e AppComponent)
+
+Component :-
+============
+
+> every component has four files -
+    
+    1] app.component.css (for view)
+    2] app.component.html (for view)
+    3] app.component.spec.ts (for backing logic)
+    4] app.component.ts (for testing)
+
+> A component is basically we can consider as a .ts file which has 3 files as an extra attachement.
+
+> Whatever other components we create in our angular application should be the child of AppComponent.
+
+Inside app.component.ts :-
+===========================
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  title = 'FirstNgApp';
+}
+
+
+> This component is annotated with @Component annotation.
+
+> It is also taking one object which has three different properties -
+
+    1] selector (By using this we register a custom tag for this component)
+
+    2] templateUrl (By using this we define what is a view of this component i.e. "app.component.html")
+
+    3] styleUrls (By using this we define what is style we want to apply to this component i.e. "app.component.css")
+
+> In this file there is only one class AppComponent which has title of our application "FirstNgApp".
+
+Creating our Own Component as a child of AppComponent (FirstAngularApp):-
+=========================================================================
+
+> There are basically three steps to create and use a component :
+
+1. Create a component
+
+2. Register it in a module (AppModule), but we can register it in any userdefined modules also(In case of large applications).
+
+3. Add an element/selector(custom tag) in the html markup to consume that compoment. 
+
+> We need to use Angular CLI to create a component - 
+
+    ng generate component hello-world
+
+                or
+
+    ng g c hello-world
+
+> When the above command executes, following things happens -
+
+1. Four component related files will be created inside the app folder in hello-world folder.(app/hello-world)
+
+2. HelloWorldComponent will be registerd inside the AppModule(app.module.ts) in declaration section.
+
+> A Component has 2 parts :-
+
+1. body part : Written inside the class body (hello-world.component.ts)
+
+        export class HelloWorldComponent implements OnInit {
+
+            constructor() { }
+
+            ngOnInit(): void {
+        }
+
+}
+
+2. Registration part : annotated with @Component (hello-world.component.ts)
+
+        @Component({
+          selector: 'app-hello-world',
+          templateUrl: './hello-world.component.html',
+          styleUrls: ['./hello-world.component.css']
+        })
+
+
+> <app-hello-world> </app-hello-world> selector of the HelloWorldComponent can not be used inside the index.html, because it is not a root component.
+
+> Here AppComponent will act as a root component.
+
+Data Binding :-
+===============
+
+> Data Binding means the binding of data from component class to the html template of that component. 
+
+> Variable of TypeScript class (app.component.ts) binds with the view of that component i.e.html file of that component(app.component.html)
+
+> Any changes to that data automatically gets updated in the view.
+
+In angular there are four types of Data binding :-
+--------------------------------------------------
+
+    1. Property binding or interpollation (One way data binding) - from component to the view.
+
+    2. Style and class binding
+
+    3. Event binding
+
+    4. Two way data binding
+
+1. Property binding or interpollation :-
+---------------------------------------
+
+Interpollation :
+----------------
+
+> Syntax : {{}} - This symbol is used to bind the data (variable, method, function) from component class (app.component.ts) to view
+
+  class (app.component.html).
+
+> Examples : 
+
+            <h2>{{currentDate}}</h2>
+
+            <input type="text" value={{name}}>
+
+> We can also evaluate some expressions using the interpollation.
+
+> This process of data-binding is known as one-way data binding because here Ts class (app.component.ts) is generating the value and
+
+  View class (app.component.html) is reading/consuming that value.
+
+> Therefore the flow of data in this process is from component to view.
+
+> Hence if we use <h1> element inside the app component's html (app.component.html), then it means <h1> element is a child element 
+  
+  and app component is a parent/host.
+
+> Similarly if we use any custom tag like <hello-world> inside the app component's html (app.component.html), then it means 
+
+  <hello-world> component is a child component and app component is a parent/host component.
+
+> Interpollation can be used without any html element directly by using its syntax.
+
+> Interpollation is mostly used with predefined html elements.
+
+> It evaluates the expression and converts it in the form of string and this string data get binded to the property.
+
+Property Binding :
+------------------
+> Syntax : [] - This symbol is used to write property attribute in a view class (app.component.html) so that the value of 
+
+                that property will be binded from component class (app.component.ts).
+
+> Examples :
+
+            <input type="text" [value]="name">
+
+            <h2 [textContent]="currentDate"></h2>
+
+> Property binding is mostly used with custom html elements i.e. components.
+
+> Using property binding we can bind any non-string data to the property of an element as well.
+
+2. Style and class binding :-
+-----------------------------
+
+> We can add the bootstrap to our angular application using two ways -
+
+      1. Offline (By downloading bootstrap)
+
+      2. Online (Using CDN)
+
+      1. Offline :
+      ------------
+
+        > Here we need to install the bootstrap in our angular application and then we need to import that in our application.
+
+        > Run the following command to install bootstrap in our angular application -
+
+              npm install bootstrap --save
+
+        > To import the bootstrap in our application we need to import it inside the styles.css file using -
+
+              @import "bootstrap/dist/css/bootstrap.css";
+
+      2. Online :
+      -----------
+
+        > In this approach we need to copy the CDN link and paste it inside the index.html file in <head> section -
+
+              <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+Class Binding :
+---------------
+
+> If it is required that to bind some additional CSS classes to an element based on some condition then we use class binding.
+
+> Example : 
+
+          <h6 [class.class1] = "isActive">The fastest man alive</h6>
+
+> In the above example class1 is the class defined inside the .css file (app.component.css) and isActive is a boolean type variable 
+  in our component class (app.component.ts). So in this approach the class1 is going to apply to <h6> only when the value of variable "isActive" is true.
+
+> ngClass : By using this we can apply mutiple classes on conditional style in much esiar way.
+
+> ngClass property takes an object as its value. 
+
+> Example :
+
+          <h6 [ngClass] = "{class3:isTrue,class4:isActive}">ngClass</h6>
+
+Style Binding :
+---------------
+
+> Style binding means binding an inline style based on condition.
+
+> Examples :
+
+          1. <h2 [style.color]="col">Lorem ipsum dolor sit amet.</h2> (here col is a variable of component class(app.component.ts))
+
+          2. <h2 [style.color]="'blue'">Lorem ipsum dolor sit amet.</h2> (here blue is the color name. it is not a variable of 
+                                                                          component class.)
+
+          3. <h3 [style.backgroundColor] = "isTrue ? 'black':'pink'">Conditional Style Binding </h3> (This is Conditional Style       Binding)
+
+3. Event Binding :-
+-------------------
+
+> It is used to handle an event that is raised from the DOM (child element i.e. element from app.component.html) in the parent  component i.e. app.component.ts.
+
+> Therefore the flow of data in this process is from view to component.
+
+> Note :-
+
+        - In Property Binding the flow of data is from component to view. 
+
+        - But in Event Binding the flow of data is from view to component.
+
+> Example - 
+            <button class="btn btn-primary" (click)="function1()">Save</button>
+            (Here whenever a click event is raised on the DOM, we are binding this event to a event handler function of our component class)
+
+> In event binding, sometime we need to get the event obj itself that is raised in the DOM (app.component.html) inside the event handler method (to get some extra information about the event), in that case we need to pass an "$event" argument to function1() function from DOM.
+
+> Example :
+
+          <button class="btn btn-primary" (click)="function2($event)">Submit</button> (From ap.component.html)
+          (Here whenever a click event is raised on the DOM, we are passing the reference of the generated event inside the function2() as "$event" due to which that function2() is itself invoked to get some extra information about the event.)
+
+          (From app.component.ts)
+          function2(e:any){
+            console.log("Button Clicked......!!");
+            console.log(e);
+            console.log(e.target);
+            console.log(e.target.textContent);
+          }
+
+> Similarly in event binding we can pass any normal data also in the function inside DOM.
+
+> Example : 
+
+          <button class="btn btn-primary" (click)="function3('Ram')">Save</button>
+
+Template Variable :
+-------------------
+
+> We can define a template variable to any element from view class (app.component.html) by using # symbol so that it can be accessed through component class (app.component.ts).
+
+> By using this variable we can get the reference of that element inside the component class (app.component.ts).
+
+> Example :
+
+          <h2 #h>Welcome to Angular</h2>
+          <button class="btn btn-primary" (click)="fun1(h)">Save</button>
+
+> With this template variable we can also get the reference of custom element (child component class).
+
+> Example :
+
+      (From app.component.html)
+      <div class="text-center">
+          <!-- Here, by assigning template variable to the app-child-component we will be able to access its component class i.e. child-component.component.ts -->
+          <app-child-component #child></app-child-component>
+          <button class="btn btn-secondary" (click) = "function7(child)">Send Child</button>
+      </div>
+
+      (From child-component.component.html)
+      <h3>This is child-component.....!!!!</h3>
+
+      (From child-component.component.ts)
+      functionX(){
+        console.log("This is from child-component.component.ts");
+      }
+
+      (From app.component.ts)
+      function7(e:any){
+        console.log("Sent Child Component...!!!!");
+        console.log(e);
+        e.functionX();  
+      }
+
+      - Here with the help of template variable (#child), we can get the child component (child-component.component.ts) object reference inside the parent component class (app.component.ts).
+
+      - Therby we can call the child component functionality (functionX()) from the parent component class (app.component.ts).
+
+4. Two way data binding :-
+--------------------------
+
+> Two way data binding means binding the component class (app.component.ts) data to the view (app.component.html) and at the same time binding the view data to the component class.
+
+> To acheive this we need one directive which is called as "ngModel" directive.
+
+> It is a built in directive belongs from FormsModule. 
+
+> A directive is used to change the appearance/behaviour of a particular element.
+
+> In order to use ngModel, firstly we need to import the FormsModule inside the import section of AppModule class (app.module.ts).
+
+> Basically we perform this two way data binding with the help of form only i.e. with the help of input control only and for inputControl we need the FormsModule.
+
+> Example :
+
+      (Inside app.component.html)
+      <div class="text-center">
+
+          <h4><input type="text" [(ngModel)]="text2"></h4>
+          <h4>{{text2}}</h4>
+          
+      </div>
+
+      (Inside app.component.ts)
+      text2:string = "I am Flash";
+
+> Note :-
+
+        [] In Property Binding the flow of data is from component to view. 
+
+        () In Event Binding the flow of data is from view to component.
+
+        [()] In two way data binding the flow is from component to the view and at the same time from view to component.
+
+
+
