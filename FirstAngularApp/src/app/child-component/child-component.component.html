@@ -1,0 +1,31 @@
+<h3>This is child-component.....!!!!</h3>
+<h3>Name is {{name}}</h3>
+<h3>Designation is {{designation}}</h3>
+<h3>Address is {{address}}</h3>
+<h3>From {{adrs}}</h3>
+<h4>Player name is {{PName}}</h4>
+<h4>Team is {{Team}}</h4>
+
+
+<!-- EventEmitter -->
+<div>
+
+    <h5>Raise event from child component to parent component started</h5>
+
+    <!-- Whenever we click on the below button, the function raiseEvent() from child-component.component.ts will be called. -->
+    <button class="btn btn-success" (click) = "raiseEvent()">Raise Event from child comp to Parent comp</button>
+
+    <h5>Raise event from child component to parent component ended</h5>
+
+</div>
+
+<div>
+
+    <h5>Raise event and pass data from child component to parent component started</h5>
+
+    <!-- Whenever we click on the below button, the function raiseEventWithData() from child-component.component.ts will be called. -->
+    <button class="btn btn-success" (click) = "raiseEventWithData('This data is from child component')">Raise Event and pass data from child comp to Parent comp</button>
+
+    <h5>Raise event and pass data from child component to parent component ended</h5>
+
+</div>

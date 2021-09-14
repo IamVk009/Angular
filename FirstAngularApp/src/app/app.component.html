@@ -1,0 +1,236 @@
+<h1>Welcome to Angular</h1>
+
+<!-- Interpollation -->
+<h3>{{getMessage()}}</h3>
+
+<h4>{{"Name : " + name}}</h4>
+
+<h4>Country : {{country}}</h4>
+
+<!-- Interpollation can be used without any html element. -->
+<!-- {{country}} -->
+
+<!-- In the above line of code, we can also use Property Binding. -->
+<!-- <h4 [textContent] = "country"></h4> -->
+
+<!-- Property Binding : Here the value of the currency variable of component class is binded with the 'value' property of <input> element. -->
+<h4>Currency : <input type="text" [value] = "currency"></h4>
+
+<h4>Salary: <input type="number" value = {{salary}}></h4>
+
+<!-- In the above line of code, we can also use Interpollation. -->
+<!-- <h4>Currency : <input type="text" value = {{currency}}></h4> -->
+
+<h5>{{today}}</h5>
+
+<div class="text-center">
+
+    <button class="btn btn-primary">Click</button>
+
+</div>
+
+<!-- Class Binding -->
+
+<h6 [class] ="class2">I am Flash</h6>
+
+<h6 [class.class1] = "isActive">The fastest man alive</h6>
+<!-- Here class1 is the class defined inside the .css file and isActive is a boolean type variable in our component class. So in this 
+     approach the class1 is going to apply to <h6> only when the value of variable "isActive" is true. -->
+
+<!-- Here we can't use [id.anyIdName] like in above element because it is class binding -->
+<h6 [id] = "id">Class Binding</h6>
+
+<h6 [ngClass] = "{class3:isTrue,class4:isActive}">ngClass</h6>
+
+<!-- Style Binding -->
+<h5 [style.color] = "col">Style Binding</h5>
+
+<h4 [style.backgroundColor] = " 'yellow' ">Style Binding</h4>
+
+<!-- Conditional Style Binding -->
+<h3 [style.backgroundColor] = "isTrue ? 'black':'pink'">Conditional Style Binding</h3>
+
+<!-- Event Binding -->
+<div class="text-center">
+
+    <!-- Here whenever a click event is raised on the DOM, we are binding this event to a event handler function of our component class. -->
+    <button class="btn btn-success" (click) = "function1()">Save</button>
+
+</div>
+
+<!-- Event Binding -->
+<div class="text-center">
+
+    <!-- Here whenever a click event is raised on the DOM, we are passing the reference of the generated event inside the function2() as
+         "$event" due to which that function2() is itself invoked to get some extra information about the event.-->
+    <button class="btn btn-secondary" (click) = "function2($event)">Submit</button>
+
+</div>
+
+
+<div class="text-center">
+
+    <!-- Here whenever a click event is raised on the DOM, we are passing the normal string value inside function3() -->
+    <button class="btn btn-secondary" (click) = "function3('Bete Moj Kardi')">Send</button>
+
+</div>
+
+<!-- Template Variable -->
+<div class="text-center">
+    
+    <h3 #heading>#Template Variable</h3>
+    <!-- Here we are passing template #heading inside function4() so that it can be accessed through component class i.e.app.component.ts-->
+    <button class="btn btn-secondary" (click) = "function4(heading)">Send Data</button>
+
+</div>
+
+<div class="text-center">
+
+    <!--Here we are passing template #button inside function5() so that it can be accessed through component class i.e.app.component.ts -->
+    <button #button class="btn btn-secondary" (click) = "function5(button)">Send</button>
+
+</div>
+
+<div class="text-center">
+
+    <h2>Enter Email : <input #email type="email"></h2>
+    <!-- Here we are passing template #email inside function6() so that it can be accessed through component class i.e.app.component.ts -->
+    <button #button class="btn btn-secondary" (click) = "function6(email)">Send Email</button>
+
+</div>
+
+<div class="text-center">
+
+    <app-child-component></app-child-component> 
+
+</div>
+
+<div class="text-center">
+    <!-- Here, by assigning template variable to the app-child-component we will be able to access its component class i.e. child-component.component.ts -->
+    <app-child-component #child></app-child-component>
+    <button class="btn btn-secondary" (click) = "function7(child)">Send Child</button>
+
+</div>
+
+<!-- Two Way Data Binding -->
+<!-- This is one way data binding i.e. the flow is from component to view. -->
+<div class="text-center">
+
+    <h4><input type="text" value="{{text1}}"></h4>
+    <h4>{{text1}}</h4>
+</div>
+
+<!-- This is two way data binding using ngModel i.e. the flow is from component to the view and at the same time from view to component. -->
+<div class="text-center">
+
+    <h4><input type="text" [(ngModel)]="text2"></h4>
+    <h4>{{text2}}</h4>
+    
+</div>
+
+<!-- This is two way data binding without using ngModel i.e. the flow is from component to the view and at the same time from view to component. -->
+<div class="text-center">
+
+    <h4>Enter Email : <input #t type="text" [value]="text3" (keyup)="text3 = t.value"></h4>
+    <h4>{{text3}}</h4>
+    
+</div>
+
+<!-- Pipe in Angular -->
+<div class="text-center">
+
+    <h5>Pipe in Angular Started</h5>
+
+    <h3>{{player.Name | lowercase}}</h3>
+
+    <h3>{{player.Country | uppercase}}</h3>
+
+    <h3>{{player.JerseyNo | number}}</h3>
+
+    <h3>{{player.Matches | number}}</h3>
+
+    <h3>{{player.Avg | number}}</h3>
+
+    <h3>{{player.BasePrice | currency:"USD"}}</h3>
+
+    <h3>{{player.Dob | date}}</h3>
+
+    <h3>{{player.Dob | date:"shortDate"}}</h3>
+
+    <h3>{{player.Dob | date:"longDate"}}</h3>
+
+    <h3>{{player.Description | lowercase}}</h3>
+
+    <h5>Pipe in Angular Ended</h5>
+
+</div>
+
+<!-- Custom pipe in Angular -->
+<div class="text-center">
+
+    <h5>Custom Pipe in Angular started</h5>
+
+    <h4>{{player.Description | trim}}</h4>
+
+    <h4>{{player.Description | trim:11}}</h4>
+
+    <h4>{{player.Description | trim:6}}</h4>
+
+    <h5>Custom Pipe in Angular Ended</h5>
+
+</div>
+
+<!-- Using TrimPipe class transformation function manually-->
+<div class="text-center">
+
+    <h5>Using TrimPipe class transformation function manually</h5>
+
+    <h4>{{player.Description2}}</h4>
+
+    <button class="btn btn-success" (click) = "trimDescription2()">Trim</button>
+
+</div>
+
+<!-- Using TrimPipe class transformation function manually as Dependency Injection  -->
+<div class="text-center">
+
+    <h5>Using TrimPipe class transformation function as Dependency Injection</h5>
+
+    <h4>{{player.Description1}}</h4>
+
+    <button class="btn btn-success" (click) = "trimDescription()">Truncate</button>
+
+</div>
+
+<!-- Using TrimPipe class transformation function manually as Dependency Injection for implememting string truncate as well as expand -->
+<div class="text-center">
+
+    <h5>Using TrimPipe class transformation function as Dependency Injection with additional functionality of Expand with truncate</h5>
+
+    <h4 (click) = "expand()">{{player.Description3}}</h4>
+
+    <button class="btn btn-success" (click) = "trimDescription3()">Truncate</button>
+
+</div>
+<!-- Property Binding -->
+<img [src]="imgUrl" [height]="imgHeight" [width] = "imgWidth">
+
+<!-- ------------------------------------------------------------------------------------------------------------------------------------ -->
+
+<!-- The 'name' and 'address' are the properties of <app-child-component> and they can be used in child-component.component.ts class. --> 
+
+<h2 [textContent] = "sentence"></h2>
+
+<!-- 'myClick' is the event raised from child component (child-component.component.ts) to parent component (app.component.ts). 
+    So after raising myClick event, handleEvent() function will be executed from app.component.ts -->
+
+<h2 [textContent] = "data"></h2>
+
+<app-child-component name="Loki" designation="Avenger" address="Marvel" adrs="HollyWood" [PName] = "playerName" [Team] = "team" (myclick) = "handleEvent()" (sendData) = "handleEventWithData($event)"></app-child-component>
+
+<!-- We can also use the values defined in app.component.ts (like PName and Team in above line)to child-component.component.ts and from their to child-component.component.html -->
+
+<!-- ------------------------------------------------------------------------------------------------------------------------------------ -->
+
+
+

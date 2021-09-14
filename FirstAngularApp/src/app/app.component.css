@@ -1,0 +1,44 @@
+h1,h3,h4,h5{
+    text-align: center;
+}
+
+h1{
+    color: crimson;
+}
+
+h3{
+    color: darkcyan;
+}
+
+h5{
+    color:forestgreen;
+}
+
+.btn{
+    margin-bottom: 10px;
+}
+
+.class1{
+    color: red;
+    text-align: center;
+}
+
+.class2{
+    color:blue;
+    text-align: center;
+}
+
+#id{
+    color: orange;
+    text-align: center;
+}
+
+.class3{
+    color: chocolate;
+    text-align: center;
+    
+}
+
+.class4{
+    background-color: aqua;
+}
