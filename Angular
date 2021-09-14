@@ -628,6 +628,21 @@ Template Variable :
       (Inside app.component.ts)
       text2:string = "I am Flash";
 
+> we can also use two way data binding without using ngModel.
+
+> Example :
+
+      (Inside app.component.html)
+      <div class="text-center">
+
+          <h4>Enter Email : <input #t type="text" [value]="text3" (keyup)="text3 = t.value"></h4>
+          <h4>{{text3}}</h4>
+          
+      </div>
+
+      (Inside app.component.ts)
+      text3:string = "Two way data binding without ngModel";
+
 > Note :-
 
         [] In Property Binding the flow of data is from component to view. 
@@ -636,5 +651,376 @@ Template Variable :
 
         [()] In two way data binding the flow is from component to the view and at the same time from view to component.
 
+Pipe in Angular :-
+==================
+
+> Pipes in Angular are used to format the data on the DOM (app.component.html).
+
+> In angular we have some built-in pipes like -
+
+      DatePipe: Formats a date value according to locale rules.
+
+      UpperCasePipe: Transforms text to all upper case.
+
+      LowerCasePipe: Transforms text to all lower case.
+
+      CurrencyPipe: Transforms a number to a currency string, formatted according to locale rules.
+
+      DecimalPipe: Transforms a number into a string with a decimal point, formatted according to locale rules.
+
+      PercentPipe: Transforms a number to a percentage string, formatted according to locale rules.
+
+> Example : 
+
+      (Inside app.component.ts)
+        player = {
+          JerseyNo: 45,
+          Name: "Rohit Sharma",
+          Matches: 155,
+          Runs: 8977,
+          BasePrice: 7000,
+          Avg: 45.7687,
+          StrikeRate: 113.65,
+          Dob: new Date(1987,6,15),
+          Country: "India",
+          Description: "Right Hand Opening Batsman"
+        }
+
+      (Inside app.component.html)
+      <div class="text-center">
+
+          <h5>Pipe in Angular Started</h5>
+
+          <h3>{{player.Name | lowercase}}</h3>
+
+          <h3>{{player.Country | uppercase}}</h3>
+
+          <h3>{{player.JerseyNo | number}}</h3>
+
+          <h3>{{player.Matches | number}}</h3>
+
+          <h3>{{player.Avg | number}}</h3>
+
+          <h3>{{player.BasePrice | currency:"USD"}}</h3>
+
+          <h3>{{player.Dob | date}}</h3>
+
+          <h3>{{player.Dob | date:"shortDate"}}</h3>
+
+          <h3>{{player.Dob | date:"longDate"}}</h3>
+
+          <h3>{{player.Description | lowercase}}</h3>
+
+          <h5>Pipe in Angular Ended</h5>
+
+      </div>
+
+How to create custom Pipe in Angular :
+--------------------------------------
+
+> To generate a custom pipe in Angular, we need to run following command -
+
+        ng g p trim (Here trim is Name Of Pipe)
+
+> This command will do following things -
+
+    1) It will create two files inside app folder - 
+
+        1. trim.pipe.ts (For pipe defination)
+
+        2. trim.pipe.spec.ts (for testing of pipe)
+
+    2) It will register TrimPipe inside the AppModule's declaration section.
+
+> Inside trim.pipe.ts -
+
+      //This is how trim.pipe.ts looks like when its generated.
+      import { Pipe, PipeTransform } from '@angular/core';
+
+      @Pipe({
+        name: 'trim'
+      })
+      export class TrimPipe implements PipeTransform {
+
+        transform(value: unknown, ...args: unknown[]): unknown {
+          return null;
+        }
+
+      }
+
+> In order to define function of our pipe we just need to modify the tranform method of this file, this method is very flexible.
+
+> Example - 
+
+      (Inside trim.pipe.ts)
+      import { Pipe, PipeTransform } from '@angular/core';
+
+      @Pipe({
+        name: 'trim'
+      })
+      export class TrimPipe implements PipeTransform {
+        // Here transform function takes two arguments i.e. value and 1D array using spread operator)
+        transform(value: string, ...args: any): string {
+          
+          let limit = 10;
+          // Here arguments.length > 1 is used because transform function takes two arguments in which the first argument is value so in order
+          // to check if there is second argument provided, we need to check if its length is >1. 
+          if(arguments.length > 1)
+          limit = args[0]
+
+          return value.substring(0,limit) + ".......";
+        }
+
+      }
+
+      (Inside app.component.html)
+      <div class="text-center">
+
+          <h5>Custom Pipe in Angular started</h5>
+
+          <h4>{{player.Description | trim}}</h4>
+
+          <h4>{{player.Description | trim:20}}</h4>
+
+          <h4>{{player.Description | trim:6}}</h4>
+
+          <h5>Custom Pipe in Angular Ended</h5>
+
+      </div>
+
+> Using TrimPipe class transform function manually -
+
+Example - 
+
+      (In app.component.html)
+
+      <div class="text-center">
+
+          <h5>Using TrimPipe class transformation function manually</h5>
+
+          <h4>{{player.Description2}}</h4>
+
+          <button class="btn btn-success" (click) = "trimDescription2()">Trim</button>
+
+      </div>
+
+      (In app.component.ts)
+      player = {
+          JerseyNo: 45,
+          Name: "Rohit Sharma",
+          Matches: 155,
+          Runs: 8977,
+          BasePrice: 7000,
+          Avg: 45.7687,
+          StrikeRate: 113.65,
+          Dob: new Date(1987,6,15),
+          Country: "India",
+          Description: "Right Hand Opening Batsman",
+          Description1: "Opening Batsman",
+          Description2: "Hello world Opening Batsman"
+        }
+
+        trimDescription2(){
+          
+          let tpipe = new TrimPipe();
+          this.player.Description2 = tpipe.transform(this.player.Description2);
+        }     
+
+> In this approach AppComponent(app.component.ts) class is dependent class where as TrimPipe class(trim.pipe.ts) is its dependency.
+
+> Hence, in above example both classes will become tightly coupled with each other.
+
+> In order to make them loosly coupled we should not create TrimPipe class object manually, instead we should use Dependency Injection mechanism.
+
+> In order to inject TrimPipe class as DI, we need to add that class inside the Dependency Context.
+
+> For that we need to register this TrimPipe class inside the "providers" section of AppModule class(app.module.ts).
+
+> Now in order to tell the angular framework to inject this TrimPipe class obj we need to define its variable inside the constructor of AppComponent class(app.component.ts).
+
+> Example - 
+
+      (Inside app.component.html)
+      <!-- Using TrimPipe class transformation function manually as Dependency Injection  -->
+      <div class="text-center">
+
+          <h5>Using TrimPipe class transformation function as Dependency Injection</h5>
+
+          <h4>{{player.Description1}}</h4>
+
+          <button class="btn btn-success" (click) = "trimDescription()">Truncate</button>
+
+      </div>
+
+      (Inside app.component.ts)
+      player = {
+          JerseyNo: 45,
+          Name: "Rohit Sharma",
+          Matches: 155,
+          Runs: 8977,
+          BasePrice: 7000,
+          Avg: 45.7687,
+          StrikeRate: 113.65,
+          Dob: new Date(1987,6,15),
+          Country: "India",
+          Description: "Right Hand Opening Batsman",
+          Description1: "Opening Batsman",
+          Description2: "Hello world Opening Batsman"
+        }
+
+        constructor(private trimp: TrimPipe){
+          
+        }
+
+        trimDescription(){
+
+          this.player.Description1 = this.trimp.transform(this.player.Description1);
+
+        }
+
+Building Reusable component using @Input and @Output anno/decorator :-
+======================================================================
+
+> @Input decorator is used to pass the data from parent component(app.component.ts) to the child component(child-component.component.ts)
+
+> @Input decorator belongs from @angular/core.
+
+> Example : 
+
+      Inside (app.component.html)
+      <!-- The 'name' and 'address' are the properties of <app-child-component> and they can be used in child-component.component.ts class. -->
+      
+      <app-child-component name="Loki" designation="Avenger" address="Marvel" adrs="HollyWood" [PName] = "playerName" [Team] = "team"></app-child-component>
+
+      <!-- We can also use the values defined in app.component.ts (like PName and Team in above line)to child-component.component.ts and from their to child-component.component.html -->
 
 
+      Inside (child-component.component.ts)
+      // Here by using @Input decorator we are using values assigned to the properties 'name' and 'address' declared in app.component.html.
+      @Input("name")
+      name?:string;
+
+      // We can skip the arguments to @Input() decorator.
+      @Input()
+      designation?:string;
+
+      @Input("address")
+      address?:string;
+
+      @Input()
+      adrs?:string;
+
+      // Below properties are declared in app.component.ts.
+      @Input()
+      PName?:string;
+
+      @Input()
+      Team?:string;
+
+      Now we can bind this data to child-component component's view (child-component.component.html)
+
+      Inside (child-component.component.html)
+      <h3>Name is {{name}}</h3>
+      <h3>Designation is {{designation}}</h3>
+      <h3>Address is {{address}}</h3>
+      <h3>From {{adrs}}</h3>
+      <h4>Player name is {{PName}}</h4>
+      <h4>Team is {{Team}}</h4>
+
+@Output:-
+---------
+
+> This decorator is used to Raise event from child component(child-component.component.ts) to Parent component(app.component.ts).
+
+> To raise an event we use EventEmitter class and its emit() funciton.
+
+> EventEmitter belongs from '@angular/core' library.
+
+> So lets create an object of EventEmitter class and assign it to a variable in (child-component.component.ts).
+
+      Inside(child-component.component.ts)
+
+      @Output()
+      myclick = new EventEmitter();
+
+      Inside(child-component.component.html)
+      <div>
+
+          <h5>Raise event from child component to parent component started</h5>
+
+          <!-- Whenever we click on the below button, the function raiseEvent() from child-component.component.ts will be called. -->
+          <button class="btn btn-success" (click) = "raiseEvent()">Raise Event from child comp to Parent comp</button>
+
+          <h5>Raise event from child component to parent component ended</h5>
+
+      </div>
+
+      Inside(child-component.component.ts)
+      // This method is going to emit an event 'myClick()' i.e. raising that event whwnwver above button is clicked.
+      raiseEvent(){
+        this.myclick.emit();
+      }
+
+      // Now in order to perform something when event is raised, we need to listen that event in Parent component(app.component.ts).
+
+      Inside(app.component.html)
+
+      
+      <h2 [textContent] = "sentence"></h2>
+      <!-- 'myClick' is the event raised from child component (child-component.component.ts) to parent component (app.component.ts). 
+          So after raising myClick event, handleEvent() function will be executed from app.component.ts -->
+
+      <app-child-component name="Loki" designation="Avenger" address="Marvel" adrs="HollyWood" [PName] = "playerName" [Team] = "team" (myclick) = "handleEvent()"></app-child-component>
+
+      Inside (app.component.ts)
+      //The below part will handle event raised from child component (child-component.component.ts)
+      sentence = "Look at me when event is raised from child component";
+      handleEvent(){
+        this.sentence = "Event is raised from child component";
+      }
+
+> Note : @Input or @Output both annotation is used inside the child component only.
+
+> With the help of event we can pass data also from the child to parent component by using '$event' property.(Discussed on line No. 540)
+
+> In case of predefined events like click, keyup, etc. this $event will represent the DOM event obj.
+
+> Where as in case of custom event it will represent the data supplied from child component to the parent component using emit() function.
+
+> Example :-
+
+      Inside(child-component.component.ts)
+
+        @Output()
+        sendData = new EventEmitter();
+
+      Inside(child-component.component.html)
+      <div>
+
+          <h5>Raise event and pass data from child component to parent component started</h5>
+
+          <!-- Whenever we click on the below button, the function raiseEventWithData() from child-component.component.ts will be called. -->
+          <button class="btn btn-success" (click) = "raiseEventWithData('This data is from child component')">Raise Event and pass data from child comp to Parent comp</button>
+
+          <h5>Raise event and pass data from child component to parent component ended</h5>
+
+      </div>
+
+      Inside(child-component.component.ts)
+        raiseEventWithData(arg:any){
+          this.sendData.emit(arg);
+        }
+
+      // Now in order to perform something when event is raised, we need to listen that event in Parent component(app.component.ts).
+
+      Inside(app.component.html)
+      <h2 [textContent] = "data"></h2>
+
+      <app-child-component name="Loki" designation="Avenger" address="Marvel" adrs="HollyWood" [PName] = "playerName" [Team] = "team" (myclick) = "handleEvent()" (sendData) = "handleEventWithData($event)"></app-child-component>
+
+
+      Inside (app.component.ts)
+          data = "Look at me to see the data passed from child component after event is raised";
+          handleEventWithData(data:any){
+          this.data = data;
+        }
